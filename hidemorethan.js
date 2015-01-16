@@ -10,21 +10,10 @@
 		};
 		var $self=this;
 		var hideout=$('<div class="hideout"></div>');
-		options=$.extend({},defaults,options);
-		hideout.insertAfter($self.last());
-		hideout.click(function(){
-				if (hideout.data('hided')) {
-					showAll();
-					options.ondisplay.call(this,hideout);
-				} 
-				else {
-					hideAll();
-					options.onhide.call(this,hideout);
-				}
-			})
 		function showAll () {
 			$self.show();
 			hideout.data('hided',false).html(options.htmlOnDisplay).removeClass(options.toggleClass);
+			options.ondisplay.call(this,hideout);
 		};
 		function hideAll () {
 			$self.each(function(index,element){
@@ -34,7 +23,21 @@
 				}
 			})
 			hideout.data('hided',true).html(options.htmlOnHide).addClass(options.toggleClass);
+			options.onhide.call(this,hideout);
 		};
-		return hideAll();
+		options=$.extend({},defaults,options);
+		if ($self.length>options.max) {
+			hideout.insertAfter($self.last());
+			hideout.click(function(){
+				if (hideout.data('hided')) {
+					showAll();
+				} 
+				else {
+					hideAll();
+				}
+			})
+			hideAll();
+		}
+		return this;
 	}
 })(jQuery)
