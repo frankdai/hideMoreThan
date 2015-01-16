@@ -84,8 +84,9 @@
 
 <script type="text/javascript">
 $('li').hideMoreThan({
-	ondisplay:function(){console.log('show all')},
-	onhide:function(){console.log('show less')}
+	'max':10,
+	ondisplay:function(){console.log(0)},
+	onhide:function(){console.log(1)}
 });
 </script>
 </body></html>

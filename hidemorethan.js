@@ -2,8 +2,8 @@
 	$.fn.hideMoreThan=function(options) {
 		var defaults={
 			'max':7,
-			ondisplay:function(){},
-			onhide:function(){},
+			ondisplay:function(hideout){},
+			onhide:function(hideout){},
 			'htmlOnHide':"Show More",
 			'htmlOnDisplay':"Show Less",
 			'toggleClass':'show'
@@ -11,23 +11,20 @@
 		var $self=this;
 		var hideout=$('<div class="hideout"></div>');
 		options=$.extend({},defaults,options);
-		hideout.html(options.htmlOnHide).addClass(options.toggleClass).data('hided',true).insertAfter($self.last());
+		hideout.insertAfter($self.last());
 		hideout.click(function(){
 				if (hideout.data('hided')) {
 					showAll();
-					hideout.data('hided',false);
-					hideout.html(options.htmlOnDisplay).removeClass(options.toggleClass);
-					options.ondisplay.call(this);
+					options.ondisplay.call(this,hideout);
 				} 
 				else {
 					hideAll();
-					hideout.data('hided',true);
-					hideout.html(options.htmlOnHide).addClass(options.toggleClass);
-					options.onhide.call(this);
+					options.onhide.call(this,hideout);
 				}
 			})
 		function showAll () {
 			$self.show();
+			hideout.data('hided',false).html(options.htmlOnDisplay).removeClass(options.toggleClass);
 		};
 		function hideAll () {
 			$self.each(function(index,element){
@@ -36,6 +33,7 @@
 					$element.hide();
 				}
 			})
+			hideout.data('hided',true).html(options.htmlOnHide).addClass(options.toggleClass);
 		};
 		return hideAll();
 	}
