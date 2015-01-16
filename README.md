@@ -1,6 +1,10 @@
 # hideMoreThan jQuery Plugin
 
-This is a very basic jQuery plugin which is used to show and hide certain member of a HTML element collection if they are simply too much of them. For example, if you have HTML
+This is a very basic jQuery plugin which is used to show and hide certain member of a HTML element collection if they are simply too much of them. 
+
+[ Checkout The Demo ] (http://frankdai.github.io/hideMoreThan/demo.html)
+
+For example, if you have HTML
 
 ```html
 <ol>
@@ -23,7 +27,7 @@ And HTML will changed to
     <li>1</li>
     <li>2</li>
     <li>3</li>
-    <li>4</li>
+    <li style="display:none">4</li>
     <div class="hideout">Show More</div>
 </ol>
 ```
